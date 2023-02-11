@@ -35,9 +35,14 @@
         flex-direction: column;
     }
 
-    .avatar {
+    .avatar-link {
         height: 80%;
         padding: 10px;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        height: 40px;
     }
 </style>
 
@@ -48,7 +53,7 @@
     <div class="navbar-account">
         {#if user}
             <div class="account-buttons">
-                <span class="orange">{user.username}</span>
+                <a href="/accounts/settings" class="orange link">{user.username}</a>
                 <a href="/accounts/logout" class="link">Logout</a>
             </div>
         {:else}
@@ -57,6 +62,8 @@
                 <a href="/accounts/register" class="link orange">Register</a>
             </div>
         {/if}
-        <img class="avatar" src={ avatar } alt="avatar"/>
+        <a href="/accounts/settings" class="avatar-link">
+            <img src={ avatar } alt="avatar" class="avatar"/>
+        </a>
     </div>
 </div>

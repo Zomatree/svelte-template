@@ -3,19 +3,15 @@ body {
 }
 
 :root {
-    --grey-1: rgb(192, 192, 192);
-    --grey-2: rgb(152, 152, 152);
-    --grey-3: rgb(112, 112, 112);
-    --grey-4: rgb(072, 072, 072);
-    --orange: #ff6600;
+    --grey-1: #dddddd;
+    --grey-2: #aaaaaa;
+    --grey-3: #777777;
+    --grey-4: #444444;
+    --orange: #ff6347;
     font-family: 'Inter', sans-serif;
 }
 @supports (font-variation-settings: normal) {
   :root { font-family: 'Inter var', sans-serif; }
-}
-
-.avatar {
-    border-radius: 50%;
 }
 
 .orange {
@@ -31,7 +27,7 @@ body {
     display: flex;
     justify-content: center;
     max-height: 100%;
-    margin-top: 300px;
+    margin-top: 10%;
 }
 
 .inner-container {

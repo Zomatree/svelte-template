@@ -1,5 +1,5 @@
 import db from "better-sqlite3";
-import { hash, verify } from "argon2";
+import { hash } from "argon2";
 import { randomBytes } from "crypto";
 import type { Account, User, Session } from "$lib/types";
 
@@ -17,7 +17,7 @@ export const createAccount = async (email: string, password: string) => {
     };
 
     database
-        .prepare<[string, string, string]>("insert into accounts(id, email, password) values (?, ?, )")
+        .prepare<[string, string, string]>("insert into accounts(id, email, password) values (?, ?, ?)")
         .run(account.id, account.email, account.password);
 
     return account
@@ -26,7 +26,7 @@ export const createAccount = async (email: string, password: string) => {
 export const getAccount = async (email: string) => {
     return database
         .prepare<string>("select * from accounts where email=?")
-        .get(email) as Session | undefined;
+        .get(email) as Account | undefined;
 }
 
 export const createUser = async (account_id: string, username: string) => {

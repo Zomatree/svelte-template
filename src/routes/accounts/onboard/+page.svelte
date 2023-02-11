@@ -1,12 +1,10 @@
 <script lang="ts">
-    import type { ActionData } from "./$types";
-
-    export let errors: ActionData;
+    export let errors: string[] = [];
 </script>
 
 <div class="container">
     <div class="inner-container">
-        <h1 class="form-header">Login</h1>
+        <h1 class="form-header">Register</h1>
         <form method="POST" class="form">
             {#if errors}
             <ul>
@@ -15,21 +13,20 @@
                 {/each}
             </ul>
             {/if}
-            <label for="email">
+            <label for="username">
                 <span class="label-header">
-                    Email
+                    Username
                 </span>
-                <input name="email" type="email" required>
+                <input name="username" required>
             </label>
-            <label for="password">
+            <label>
                 <span class="label-header">
-                    Password
+                    Profile Picture
                 </span>
-                <input name="password" type="password" required>
+                <input type="file" accept="image/png, image/jpeg">
             </label>
-            <span>No account? <a href="/accounts/register">Create account!</a></span>
             <button class="button">
-                Login
+                Next
             </button>
         </form>
     </div>

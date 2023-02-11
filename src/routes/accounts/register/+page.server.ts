@@ -1,13 +1,13 @@
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
-import { createSession, getAccount } from '$lib/server/database';
+import { createAccount, createSession, getSession, getUser } from '$lib/server/database';
 import { formatZodError } from '$lib/utils';
-import { verify } from 'argon2';
-import { redirect } from "@sveltejs/kit";
+import { redirect } from '@sveltejs/kit';
 
 const LoginForm = z.object({
     email: z.string().email(),
-    password: z.string()
+    password: z.string().regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, "Password must be at least 8 characeters and have one number."),
+    confirm_password: z.string()
 })
 
 export const load = (async ({ cookies }) => {
@@ -26,15 +26,15 @@ export const actions = {
             return formatZodError(login_form.error)
         };
 
-        let account = await getAccount(login_form.data.email);
-
-        if (!account || !verify(account.password, login_form.data.password)) {
-            return ["Invalid username or password"]
+        if (login_form.data.password != login_form.data.confirm_password) {
+            return ["Passwords do not match."]
         }
+
+        let account = await createAccount(login_form.data.email, login_form.data.password);
 
         let session = await createSession(account.id);
 
         cookies.set("token", session.token, {path: "/"});
-        throw redirect(301, "/home");
+        throw redirect(301, "/home")
     }
 } satisfies Actions;

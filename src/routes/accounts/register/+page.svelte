@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="inner-container">
-        <h1 class="form-header">Login</h1>
+        <h1 class="form-header">Register</h1>
         <form method="POST" class="form">
             {#if errors}
             <ul>
@@ -27,7 +27,13 @@
                 </span>
                 <input name="password" type="password" required>
             </label>
-            <span>No account? <a href="/accounts/register">Create account!</a></span>
+            <label for="confirm_password">
+                <span class="label-header">
+                    Confirm Password
+                </span>
+                <input name="confirm_password" type="password" required>
+            </label>
+            <span>Already have an account? <a href="/accounts/login">Log in!</a></span>
             <button class="button">
                 Login
             </button>
