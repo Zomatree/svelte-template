@@ -8,6 +8,7 @@ body {
     --grey-3: #777777;
     --grey-4: #444444;
     --orange: #ff6347;
+    --blue: #0080ff;
     font-family: 'Inter', sans-serif;
 }
 @supports (font-variation-settings: normal) {
@@ -17,6 +18,11 @@ body {
 .orange {
     color: var(--orange)!important
 }
+
+.blue-bg {
+    background-color: var(--blue)!important
+}
+
 
 .link {
     text-decoration: none;

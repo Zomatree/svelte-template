@@ -1,0 +1,47 @@
+.settings-container {
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+}
+
+.settings-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.text-input {
+    border-radius: 0;
+    padding: 5px;
+    margin-top: 2px;
+    border-style: none;
+    border-bottom: solid var(--grey-2);
+}
+
+.text-input:focus {
+    border-bottom: solid var(--grey-3);
+    outline: none;
+}
+
+.text-input:disabled {
+    background-color: unset;
+}
+
+.settings-header {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.control-buttons {
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.update-password-container {
+    display: flex;
+    gap: 20px;
+}

@@ -29,6 +29,12 @@ export const getAccount = async (email: string) => {
         .get(email) as Account | undefined;
 }
 
+export const getAccountById = async (id: string) => {
+    return database
+        .prepare<string>("select * from accounts where id=?")
+        .get(id) as Account | undefined;
+}
+
 export const createUser = async (account_id: string, username: string) => {
     let user: User = { account_id, username, avatar: null, avatar_format: null };
 

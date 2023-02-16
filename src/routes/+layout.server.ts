@@ -1,12 +1,13 @@
-import { getSession, getUser } from "$lib/server/database";
+import { getAccountById, getSession, getUser } from "$lib/server/database";
+import type { User, Account } from "$lib/types";
 import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 
-export const load = (async ({cookies, route}) => {
+export const load = (async ({cookies, route}): Promise<{ user: User, account: Account } | { user: null, account: null }> => {
     let token = cookies.get("token");
 
     if (!token) {
-        return { user: null }
+        return { user: null, account: null }
     };
 
     let session = await getSession(token);
@@ -14,7 +15,7 @@ export const load = (async ({cookies, route}) => {
     console.log(session, token)
 
     if (!session) {
-        return { user: null }
+        return { user: null, account: null }
     };
 
     let user = await getUser(session.account_id);
@@ -23,8 +24,11 @@ export const load = (async ({cookies, route}) => {
         throw redirect(301, "/accounts/onboard")
     }
 
+    let account = await getAccountById(user.account_id);
+
     return {
-        user: user!
+        user: user!,
+        account: account!
     }
 
 }) satisfies LayoutServerLoad
