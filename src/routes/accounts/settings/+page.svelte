@@ -2,10 +2,10 @@
 	import { tobase64 } from "$lib/utils";
     import "./styles.scss";
     import DefaultAvatar from "$lib/assets/default-avatar.png";
-	import type { PageParentData } from "./$types";
+	import type { PageData } from "./$types";
+	import { redirect } from "@sveltejs/kit";
 
-    export let _data: PageParentData;
-    export let data = { user: _data.user!, account: _data.account! }
+    export let data: PageData;
     export let current_avatar = data.user.avatar_format && data.user.avatar ? tobase64(data.user.avatar_format, data.user.avatar!) : DefaultAvatar
 </script>
 
@@ -13,7 +13,7 @@
     <div class="settings-column">
         <img class="avatar" src={current_avatar} width="200" height="200">
         <button>Remove</button>
-        <button class="blue-bg">Upload</button>
+        <input type="file" class="blue-bg">
     </div>
     <div class="settings-column">
         <p class="settings-header">Username</p>
